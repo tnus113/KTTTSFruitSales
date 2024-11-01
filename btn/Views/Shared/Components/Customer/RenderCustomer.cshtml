@@ -3,13 +3,12 @@
 *@
 @{
 }
-
-@model IEnumerable<Provider>
+@model IEnumerable<Customer>
 <ul class="nav">
-    @foreach(var s in Model)
+    @foreach (var s in Model)
     {
-        <li class="nav-item" id="@s.ProviderID">
-            <a class="nav-link">@s.ProviderName</a>
+        <li class="nav-item" id="@s.CustomerId">
+            <a class="nav-link">@s.CustomerName</a>
         </li>
     }
 </ul>
