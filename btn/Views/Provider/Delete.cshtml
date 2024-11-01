@@ -1,0 +1,55 @@
+﻿@model btn.Models.Provider
+@using btn.Helper
+
+@{
+    ViewData["Title"] = "Xóa nhà cung cấp";
+    Layout = "~/Views/Shared/MyLayoutHelper.cshtml";
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<section class="content">
+    <div class="ms-2 mx-2">
+        <div class="card card-danger">
+            <div class="card-header">
+                <h3 class="card-title">Thông tin nhà cung cấp cần xóa</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+
+                <strong><i class="fas fa-id-card mr-1"></i> @Html.DisplayNameFor(m => m.ProviderID)</strong>
+                <p class="text-muted">@Html.DisplayFor(m => m.ProviderID)</p>
+
+                <hr>
+
+                <strong><i class="fas fa-phone-alt mr-1"></i> @Html.DisplayNameFor(m => m.ProviderName)</strong>
+                <p class="text-muted">@Html.DisplayFor(m => m.ProviderName)</p>
+
+                <hr>
+
+                <strong><i class="fas fa-map-marker-alt mr-1"></i> @Html.DisplayNameFor(m => m.Address)</strong>
+                <p class="text-muted">@Html.DisplayFor(m => m.Address)</p>
+
+                <hr>
+
+                <strong><i class="fas fa-map-marker-alt mr-1"></i> @Html.DisplayNameFor(m => m.PhoneNumber)</strong>
+                <p class="text-muted">@Html.DisplayFor(m => m.PhoneNumber)</p>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <!-- Xác nhận xóa -->
+        <form asp-action="Delete" method="post">
+            <div class="form-group">
+                <input type="hidden" asp-for="ProviderID" />
+                <input type="submit" value="Xóa" class="btn btn-danger" />
+                <a asp-action="Index" class="btn btn-secondary">Quay Lại</a>
+            </div>
+        </form>
+    </div>
+</section>

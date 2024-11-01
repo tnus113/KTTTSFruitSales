@@ -1,0 +1,61 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model btn.Models.SellBillDetail
+@using btn.Helper
+
+@{
+    ViewData["Title"] = "Xóa Mặt Hàng Trong Hóa Đơn";
+    Layout = "~/Views/Shared/MyLayoutHelper.cshtml";
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<section class="content">
+    <div class="ms-2 mx-2">
+        <div class="card card-danger">
+            <div class="card-header">
+                <h3 class="card-title">Thông tin mặt hàng cần xóa</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+
+                <strong><i class="fas fa-id-card mr-1"></i> @Html.DisplayNameFor(m => m.ProductId)</strong>
+                <p class="text-muted">@Html.DisplayFor(m => m.ProductId)</p>
+
+                <hr>
+
+                <strong><i class="fas fa-phone-alt mr-1"></i> @Html.DisplayNameFor(m => m.ProductSellAmount)</strong>
+                <p class="text-muted">@Html.DisplayFor(m => m.ProductSellAmount)</p>
+
+                <hr>
+
+                <strong><i class="fas fa-map-marker-alt mr-1"></i> @Html.DisplayNameFor(m => m.SellDiscount)</strong>
+                <p class="text-muted">@Html.DisplayFor(m => m.SellDiscount)</p>
+
+                <hr>
+
+                <strong><i class="fas fa-map-marker-alt mr-1"></i> @Html.DisplayNameFor(m => m.SellMoney)</strong>
+                <p class="text-muted">@Html.DisplayFor(m => m.SellMoney)</p>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <!-- Xác nhận xóa -->
+        <form asp-action="DeleteDetail" method="post">
+            <div class="form-group">
+                <input type="hidden" asp-for="SellBillId" />
+                <input type="submit" value="Xóa" class="btn btn-danger" />
+                <a asp-action="Index" class="btn btn-secondary">Quay Lại</a>
+            </div>
+        </form>
+    </div>
+</section>

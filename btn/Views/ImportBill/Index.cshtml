@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@model IEnumerable<btn.Models.ImportBill>
+
+@{
+    ViewData["Title"] = "ImportBill";
+    Layout = "~/Views/Shared/MyLayoutHelper.cshtml";
+}
+
+<div class="mt-2">
+    <h1>Hóa đơn nhập</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Mã hóa đơn</th>
+                <th>Mã nhân viên</th>
+                <th>Mã nhà cung cấp</th>
+                <th>Ngày nhập</th>
+                <th>Tổng tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var s in Model)
+            {
+                <tr>
+                    <td>@s.ImportBillId</td>
+                    <td>@s.EmployeeId</td>
+                    <td>@s.ProviderId</td>
+                    <td>@s.ImportsDate</td>
+                    <td>@s.TotalMoney</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@s.ImportBillId">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@s.ImportBillId">Delete</a> |
+                        <a asp-action="Detail" asp-route-id="@s.ImportBillId">Detail</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-action="Create" class="btn btn-primary">Tạo hóa đơn bán mới</a>
+</div>

@@ -1,0 +1,109 @@
+﻿@{
+}
+
+@model btn.Models.Product
+
+@{
+    ViewData["Title"] = "Tạo mặt hàng mới";
+    Layout = "~/Views/Shared/MyLayoutHelper.cshtml";
+}
+
+<section class="content">
+    <div class="mt-2">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Thông tin hàng hóa</h3>
+            </div>
+            <div class="card-body">
+
+                <form asp-controller="Product" asp-action="Create" method="post" class="mt-3">
+
+                    <div class="form-group row mb-3">
+                        <label asp-for="ProductName" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="ProductName" class="form-control" />
+                            <span asp-validation-for="ProductName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <label asp-for="Unit" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="Unit" class="form-control" />
+                            <span asp-validation-for="Unit" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <label asp-for="ProvidePlace" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="ProvidePlace" class="form-control" />
+                            <span asp-validation-for="ProvidePlace" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <label asp-for="Uses" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="Uses" class="form-control" />
+                            <span asp-validation-for="Uses" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <label asp-for="Color" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="Color" class="form-control" />
+                            <span asp-validation-for="Color" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <label asp-for="Amount" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="Amount" class="form-control" />
+                            <span asp-validation-for="Amount" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <label asp-for="MoneyOnImport" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="MoneyOnImport" class="form-control" />
+                            <span asp-validation-for="MoneyOnImport" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <label asp-for="MoneyOnSell" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="MoneyOnSell" class="form-control" />
+                            <span asp-validation-for="MoneyOnSell" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <label asp-for="Character" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="Character" class="form-control" />
+                            <span asp-validation-for="Character" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <a asp-action="Index" class="btn btn-secondary">Quay Lại</a>
+                            <button type="submit" class="btn btn-primary float-right">Tạo</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+@section Scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+}

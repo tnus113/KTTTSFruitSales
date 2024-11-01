@@ -1,0 +1,15 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IEnumerable<Provider>
+<ul class="nav">
+    @foreach(var s in Model)
+    {
+        <li class="nav-item">
+            <a asp-controller="Provider" asp-action="Index" asp-route-mid="@s.ProviderID" class="nav-link">@s.ProviderName</a>
+        </li>
+    }
+</ul>

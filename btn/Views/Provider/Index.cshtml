@@ -1,0 +1,102 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@model IEnumerable<btn.Models.Provider>
+
+@{
+    ViewData["Title"] = "Provider";
+    Layout = "~/Views/Shared/MyLayoutHelper.cshtml";
+}
+
+<div class="mt-2">
+    <h1>Nhà cung cấp</h1>
+    @await Component.InvokeAsync("Provider")
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <input id="keyword" class="form-control" name="keyword" type="text" placeholder="Search provider"/>
+            <button id="btnSearch" class="btn btn-primary" type="button">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+    <div id="content">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Mã nhà cung cấp</th>
+                    <th>Tên nhà cung cấp</th>
+                    <th>Địa chỉ</th>
+                    <th>Số điện thoại</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var s in Model)
+                {
+                    <tr>
+                        <td>@s.ProviderID</td>
+                        <td>@s.ProviderName</td>
+                        <td>@s.Address</td>
+                        <td>@s.PhoneNumber</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@s.ProviderID">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@s.ProviderID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <ul class="pagination">
+            @for (int i=1; i <= ViewBag.pageNum; i++)
+            {
+                <li class="page-item" page="@i" @(ViewBag.mid != null ? "mid='ViewBag.mid'":"") @(ViewBag.keyword != null ? "keyword='@ViewBag.keyword'":"")>
+                    <a class="page-link">@i</a>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <a asp-action="Create" class="btn btn-primary">Tạo nhà cung cấp mới</a>
+</div>
+@section Scripts{
+    <script>
+        $('body').on('click', 'li.page-item', function (e) {
+            var page = $(this).attr("page");
+            var mid = $(this).attr("mid");
+            var keyword = $(this).attr("keyword");
+            var data = { mid: mid, keyword: keyword, pageIndex: page };
+            $.ajax({
+                url: "ProviderFilter",
+                data: data,
+                success: function (response) {
+                    $("div#content").html(response);
+                }
+            });
+        });
+        $(".nav li").click(function (e) {
+            var id = $(this).attr("id");
+            var data = { mid: id };
+            $.ajax({
+                url: "ProviderFilter",
+                data: data,
+                success: function (response) {
+                    $("div#content").html(response);
+                }
+            });
+        });
+        $("button#btnSearch").click(function (e) {
+            var keyword = $("keyword").val();
+            var data = { keyword: keyword };
+            $.ajax({
+                url: "ProviderFilter",
+                data: data;
+                success: function (response) {
+                    $("div#content").html(response);
+                }
+            });
+        });
+    </script>
+}

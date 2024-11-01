@@ -1,0 +1,39 @@
+﻿@model btn.Models.ImportBill
+
+@{
+    ViewData["Title"] = "ImportBillDetail";
+    Layout = "~/Views/Shared/MyLayoutHelper.cshtml";
+}
+
+<div class="mt-2">
+    <h1>Chi tiết hóa đơn nhập</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Mã Hóa Đơn</th>
+                <th>Mã hàng</th>
+                <th>Số lượng bán</th>
+                <th>Giảm giá</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var s in Model.ImportBillDetails)
+            {
+                <tr>
+                    <td>@s.ImportBillId</td>
+                    <td>@s.ProductId</td>
+                    <td>@s.ProductImportAmount</td>
+                    <td>@s.ImportDiscount</td>
+                    <td>@s.ImportMoney</td>
+                    <td>
+                        <a asp-action="EditDetail" asp-route-id="@s.ImportBillDetailId">Edit</a> |
+                        <a asp-action="DeleteDetail" asp-route-id="@s.ImportBillDetailId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-action="CreateDetail" asp-route-importbillid="@Model.ImportBillId" class="btn btn-primary">Thêm hàng hóa vào hóa đơn</a>
+</div>

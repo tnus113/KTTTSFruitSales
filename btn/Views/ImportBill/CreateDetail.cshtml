@@ -1,0 +1,70 @@
+﻿@model btn.Models.ImportBillDetail
+
+@{
+    ViewData["Title"] = "AddProductToDetail";
+    Layout = "~/Views/Shared/MyLayoutHelper.cshtml";
+}
+
+<section class="content">
+    <div class="mt-2">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Thêm hàng hóa</h3>
+            </div>
+            <div class="card-body">
+
+                <form asp-controller="ImportBill" asp-action="CreateDetail" method="post" class="mt-3">
+
+                    <div class="form-group row mb-3">
+                        <label asp-for="ImportBillId" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <select asp-for="ImportBillId" class="form-control" asp-items="ViewBag.ImportBills">
+                                <option value="">-- Select an ImportBillId --</option>
+                            </select>
+                            <span asp-validation-for="ImportBillId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <label asp-for="ProductId" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <select asp-for="ProductId" class="form-control" asp-items="ViewBag.Products">
+                                <option value="">-- Select an Products --</option>
+                            </select>
+                            <span asp-validation-for="ProductId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <label asp-for="ProductImportAmount" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="ProductImportAmount" class="form-control" />
+                            <span asp-validation-for="ProductImportAmount" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <label asp-for="ImportDiscount" class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <input asp-for="ImportDiscount" class="form-control" />
+                            <span asp-validation-for="ImportDiscount" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <a asp-action="Index" class="btn btn-secondary">Quay Lại</a>
+                            <button type="submit" class="btn btn-primary float-right">Tạo</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+@section Scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+}

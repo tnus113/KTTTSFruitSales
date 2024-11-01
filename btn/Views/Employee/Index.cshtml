@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@model IEnumerable<btn.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employees";
+    Layout = "~/Views/Shared/MyLayoutHelper.cshtml";
+}
+
+<div class="mt-2">
+    <h1>Thông tin khách hàng</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Mã nhân viên</th>
+                <th>Tên nhân viên</th>
+                <th>Địa chỉ</th>
+                <th>Số điện thoại</th>
+                <th>Giới tính</th>
+                <th>Ngày sinh</th>
+                <th>Chức vụ</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var s in Model)
+            {
+                <tr>
+                    <td>@s.EmployeeId</td>
+                    <td>@s.EmployeeName</td>
+                    <td>@s.Address</td>
+                    <td>@s.PhoneNumber</td>
+                    <td>@s.Gender</td>
+                    <td>@s.DateOfBirth</td>
+                    <td>@s.Position</td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@s.EmployeeId">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@s.EmployeeId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-action="Create" class="btn btn-primary">Thêm khách hàng mới</a>
+</div>
