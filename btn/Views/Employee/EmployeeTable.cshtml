@@ -1,0 +1,47 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<btn.Models.Employee>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Mã nhân viên</th>
+            <th>Tên nhân viên</th>
+            <th>Địa chỉ</th>
+            <th>Số điện thoại</th>
+            <th>Giới tính</th>
+            <th>Ngày sinh</th>
+            <th>Chức vụ</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@s.EmployeeId</td>
+                <td>@s.EmployeeName</td>
+                <td>@s.Address</td>
+                <td>@s.PhoneNumber</td>
+                <td>@s.Gender</td>
+                <td>@s.DateOfBirth</td>
+                <td>@s.Position</td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@s.EmployeeId">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@s.EmployeeId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<ul class="pagination">
+    @for (int i = 1; i <= ViewBag.pageNum; i++)
+    {
+        <li class="page-item" page="@i" @(ViewBag.mid != null ? "mid='ViewBag.mid'" : "") @(ViewBag.keyword != null ? "keyword='@ViewBag.keyword'" : "")>
+            <a class="page-link">@i</a>
+        </li>
+    }
+</ul>

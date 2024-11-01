@@ -14,32 +14,90 @@
 
 <div class="mt-2">
     <h1>Thông tin khách hàng</h1>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Mã khách hàng</th>
-                <th>Tên khách hàng</th>
-                <th>Địa chỉ</th>
-                <th>Số điện thoại</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var s in Model)
-            {
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <input id="keyword" class="form-control" name="keyword" type="text" placeholder="Search employee" />
+            <button id="btnSearch" class="btn btn-primary" type="button">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+    <div id="content">
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>@s.CustomerId</td>
-                    <td>@s.CustomerName</td>
-                    <td>@s.Address</td>
-                    <td>@s.PhoneNumber</td>
-
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@s.CustomerId">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@s.CustomerId">Delete</a>
-                    </td>
+                    <th>Mã khách hàng</th>
+                    <th>Tên khách hàng</th>
+                    <th>Địa chỉ</th>
+                    <th>Số điện thoại</th>
                 </tr>
+            </thead>
+            <tbody>
+                @foreach (var s in Model)
+                {
+                    <tr>
+                        <td>@s.CustomerId</td>
+                        <td>@s.CustomerName</td>
+                        <td>@s.Address</td>
+                        <td>@s.PhoneNumber</td>
+
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@s.CustomerId">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@s.CustomerId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <ul class="pagination">
+            @for (int i = 1; i <= ViewBag.pageNum; i++)
+            {
+                <li class="page-item" page="@i" @(ViewBag.mid != null ? "mid='ViewBag.mid'" : "") @(ViewBag.keyword != null ? "keyword='@ViewBag.keyword'" : "")>
+                    <a class="page-link">@i</a>
+                </li>
             }
-        </tbody>
-    </table>
+        </ul>
+    </div>
 
     <a asp-action="Create" class="btn btn-primary">Thêm khách hàng mới</a>
 </div>
+@section Scripts {
+    <script>
+
+        $('body').on('click', 'li.page-item', function (e) {
+            var page = $(this).attr("page");
+            var mid = $(this).attr("mid");
+            var keyword = $(this).attr("keyword");
+            var data = { mid: mid, keyword: keyword, pageIndex: page };
+            $.ajax({
+                url: "CustomerFilter",
+                data: data,
+                success: function (response) {
+                    $("div#content").html(response);
+                }
+            });
+        });
+        $(".nav li").click(function (e) {
+            var id = $(this).attr("id");
+            var data = { mid: id };
+            $.ajax({
+                url: "CustomerFilter",
+                data: data,
+                success: function (response) {
+                    $("div#content").html(response);
+                }
+            });
+        });
+        $("button#btnSearch").click(function (e) {
+            var keyword = $("#keyword").val();
+            var data = { keyword: keyword };
+            $.ajax({
+                url: "CustomerFilter",
+                data: data,
+                success: function (response) {
+                    $("div#content").html(response);
+                }
+            });
+        });
+    </script>
+}

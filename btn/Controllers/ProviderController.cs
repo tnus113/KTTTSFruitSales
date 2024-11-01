@@ -111,6 +111,12 @@ namespace btn.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult ProviderById(int mid)
+        {
+            var provider = db.Providers.Where(l =>  l.ProviderID == mid).ToList();
+            return PartialView("ProviderTable", provider);
+        }
+
         public IActionResult ProviderFilter(int? mid, string? keyword, int? pageIndex)
         {
             var providers = (IQueryable<Provider>) db.Providers;
@@ -120,7 +126,7 @@ namespace btn.Controllers
                 providers = providers.Where(e => e.ProviderID == mid);
                 ViewBag.mid = mid;
             }
-            if (keyword != null)
+            if (!string.IsNullOrEmpty(keyword))
             {
                 providers = providers.Where(l => l.ProviderName.ToLower().Contains(keyword.ToLower()));
                 ViewBag.keyword = keyword;
@@ -128,7 +134,7 @@ namespace btn.Controllers
             int pageNum = (int)Math.Ceiling(providers.Count() / (float)pageSize);
             ViewBag.pageNum = pageNum;
             var result = providers.Skip(pageSize * (page - 1)).Take(pageSize);
-            return View(result);
+            return PartialView("ProviderTable",result);
         }
     }
 }

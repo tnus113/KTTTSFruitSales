@@ -1,0 +1,53 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<btn.Models.Product>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Mã hàng</th>
+            <th>Tên hàng</th>
+            <th>Đơn vị</th>
+            <th>Nơi sản xuất</th>
+            <th>Công dụng</th>
+            <th>Màu sắc</th>
+            <th>Số lượng</th>
+            <th>Giá nhập</th>
+            <th>Giá bán</th>
+            <th>Đặc điểm</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@s.ProductId</td>
+                <td>@s.ProductName</td>
+                <td>@s.Unit</td>
+                <td>@s.ProvidePlace</td>
+                <td>@s.Uses</td>
+                <td>@s.Color</td>
+                <td>@s.Amount</td>
+                <td>@s.MoneyOnImport</td>
+                <td>@s.MoneyOnSell</td>
+                <td>@s.Character</td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@s.ProductId">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@s.ProductId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<ul class="pagination">
+    @for (int i = 1; i <= ViewBag.pageNum; i++)
+    {
+        <li class="page-item" page="@i" @(ViewBag.mid != null ? "mid='ViewBag.mid'" : "") @(ViewBag.keyword != null ? "keyword='@ViewBag.keyword'" : "")>
+            <a class="page-link">@i</a>
+        </li>
+    }
+</ul>

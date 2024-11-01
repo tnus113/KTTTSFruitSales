@@ -14,7 +14,6 @@
 
 <div class="mt-2">
     <h1>Nhà cung cấp</h1>
-    @await Component.InvokeAsync("Provider")
     <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
         <div class="input-group">
             <input id="keyword" class="form-control" name="keyword" type="text" placeholder="Search provider"/>
@@ -63,6 +62,7 @@
 </div>
 @section Scripts{
     <script>
+        
         $('body').on('click', 'li.page-item', function (e) {
             var page = $(this).attr("page");
             var mid = $(this).attr("mid");
@@ -88,11 +88,11 @@
             });
         });
         $("button#btnSearch").click(function (e) {
-            var keyword = $("keyword").val();
+            var keyword = $("#keyword").val();
             var data = { keyword: keyword };
             $.ajax({
                 url: "ProviderFilter",
-                data: data;
+                data: data,
                 success: function (response) {
                     $("div#content").html(response);
                 }
